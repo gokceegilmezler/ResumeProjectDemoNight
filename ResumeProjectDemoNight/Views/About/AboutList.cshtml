@@ -1,0 +1,53 @@
+﻿@model ResumeProjectDemoNight.Entities.About
+
+@{
+    ViewData["Title"] = "AboutList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="p-8">
+    <h2 class="text-2xl font-bold mb-6 text-white">Hakkımda Düzenle</h2>
+    
+    <form method="post" class="bg-white p-6 rounded-lg">
+        <input type="hidden" asp-for="AboutId" />
+        
+        <div class="mb-4">
+            <label class="block mb-2 font-bold">Ad Soyad</label>
+            <input type="text" 
+                   asp-for="NameSurname" 
+                   class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2" 
+                   style="background: white !important; color: black !important;" />
+        </div>
+        
+        <div class="mb-4">
+            <label class="block mb-2 font-bold">Title (Meslek)</label>
+            <input type="text" 
+                   asp-for="Title" 
+                   class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2" 
+                   style="background: white !important; color: black !important;" 
+                   placeholder="Full Stack Developer" />
+        </div>
+        
+        <div class="mb-4">
+            <label class="block mb-2 font-bold">Fotoğraf URL</label>
+            <input type="text" 
+                   asp-for="ImageUrl" 
+                   class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2" 
+                   style="background: white !important; color: black !important;" 
+                   placeholder="/images/profile.jpg" />
+        </div>
+        
+        <div class="mb-4">
+            <label class="block mb-2 font-bold">Açıklama</label>
+            <textarea asp-for="Description" 
+                      class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2" 
+                      style="background: white !important; color: black !important;" 
+                      rows="5"></textarea>
+        </div>
+        
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded font-bold">
+            Kaydet
+        </button>
+    </form>
+</div>

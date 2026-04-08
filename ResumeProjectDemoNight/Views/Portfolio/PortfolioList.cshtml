@@ -1,0 +1,54 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Portfolio>
+
+@{
+    ViewData["Title"] = "PortfolioList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="p-8">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-white">Projelerim</h2>
+        <a href="/Portfolio/CreatePortfolio/" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Yeni Proje Ekle
+        </a>
+    </div>
+    
+    <div class="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow">
+        <table class="w-full">
+            <thead class="bg-slate-100 dark:bg-slate-700">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-slate-300">#</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-slate-300">Başlık</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-slate-300">Durum</th>
+                    <th class="px-6 py-3 text-right text-sm font-bold text-slate-300">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="border-b dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
+                        <td class="px-6 py-4 text-white">@item.PortfolioId</td>
+                        <td class="px-6 py-4 text-white">@item.ProjecktTitle</td>
+                        <td class="px-6 py-4">
+                            @if (item.Status)
+                            {
+                                <span class="px-2 py-1 bg-green-500 text-white text-xs rounded">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="px-2 py-1 bg-gray-500 text-white text-xs rounded">Pasif</span>
+                            }
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="/Portfolio/UpdatePortfolio/@item.PortfolioId"
+                               class="text-blue-500 hover:underline mr-3">Güncelle</a>
+                            <a href="/Portfolio/DeletePortfolio/@item.PortfolioId"
+                               onclick="return confirm('Silmek istediğinize emin misiniz?')"
+                               class="text-red-500 hover:underline">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

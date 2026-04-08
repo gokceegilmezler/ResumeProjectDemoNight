@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="p-8">
+    <!-- Başlık -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-white">Dashboard</h1>
+        <p class="text-slate-400 mt-2">Hoş geldiniz! İşte projenizin özeti.</p>
+    </div>
+
+    <!-- İstatistik Kartları -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Proje Sayısı -->
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-blue-100 text-sm">Toplam Projeler</p>
+                    <h3 class="text-4xl font-bold mt-2">@ViewBag.TotalProjects</h3>
+                </div>
+                <div class="bg-white/20 p-4 rounded-lg">
+                    <i class="fas fa-briefcase text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mesaj Sayısı -->
+        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-green-100 text-sm">Toplam Mesajlar</p>
+                    <h3 class="text-4xl font-bold mt-2">@ViewBag.TotalMessages</h3>
+                </div>
+                <div class="bg-white/20 p-4 rounded-lg">
+                    <i class="fas fa-envelope text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Okunmamış Mesajlar -->
+        <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-orange-100 text-sm">Okunmamış Mesajlar</p>
+                    <h3 class="text-4xl font-bold mt-2">@ViewBag.UnreadMessages</h3>
+                </div>
+                <div class="bg-white/20 p-4 rounded-lg">
+                    <i class="fas fa-bell text-3xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Referanslar -->
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-purple-100 text-sm">Referanslar</p>
+                    <h3 class="text-4xl font-bold mt-2">@ViewBag.TotalTestimonials</h3>
+                </div>
+                <div class="bg-white/20 p-4 rounded-lg">
+                    <i class="fas fa-users text-3xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Hakkımda Özeti -->
+        <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+            <h2 class="text-xl font-bold text-white mb-4">Hakkımda Özeti</h2>
+            <div class="flex items-start gap-4">
+                <img src="@ViewBag.About?.ImageUrl"
+                     alt="@ViewBag.About?.NameSurname"
+                     class="w-20 h-20 rounded-full object-cover" />
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-white">@ViewBag.About?.NameSurname</h3>
+                    <p class="text-blue-400 text-sm mb-2">@ViewBag.About?.Title</p>
+                    <p class="text-slate-300 text-sm line-clamp-3">@ViewBag.About?.Description</p>
+                    <a href="/About/AboutList" class="text-blue-400 text-sm mt-2 inline-block hover:underline">
+                        Düzenle →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hızlı İstatistikler -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+            <h2 class="text-xl font-bold text-white mb-4">Diğer İstatistikler</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-300">Deneyimler</span>
+                    <span class="text-2xl font-bold text-white">@ViewBag.TotalExperiences</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-300">Yetenekler</span>
+                    <span class="text-2xl font-bold text-white">@ViewBag.TotalSkills</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Mesajlar -->
+    <div class="mt-6 bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+        <h2 class="text-xl font-bold text-white mb-4">Son Gelen Mesajlar</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-slate-100 dark:bg-slate-700">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-sm text-slate-300">Gönderen</th>
+                        <th class="px-4 py-3 text-left text-sm text-slate-300">Konu</th>
+                        <th class="px-4 py-3 text-left text-sm text-slate-300">Tarih</th>
+                        <th class="px-4 py-3 text-left text-sm text-slate-300">Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.RecentMessages != null)
+                    {
+                        @foreach (var message in ViewBag.RecentMessages)
+                        {
+                            <tr class="border-b dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
+                                <td class="px-4 py-3 text-white">@message.NameSurname</td>
+                                <td class="px-4 py-3 text-slate-300">@message.Subject</td>
+                                <td class="px-4 py-3 text-slate-400 text-sm">@message.SendDate.ToString("dd.MM.yyyy")</td>
+                                <td class="px-4 py-3">
+                                    @if (message.IsRead)
+                                    {
+                                        <span class="px-2 py-1 bg-gray-500 text-white text-xs rounded">Okundu</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="px-2 py-1 bg-blue-500 text-white text-xs rounded">Yeni</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4 text-center">
+            <a href="/Message/MessageList" class="text-blue-400 hover:underline">Tüm Mesajları Gör →</a>
+        </div>
+    </div>
+</div>
+

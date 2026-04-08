@@ -1,0 +1,28 @@
+﻿<!-- Bildirimler -->
+<div class="flex items-center gap-3">
+    <!-- Proje Sayısı -->
+    <a href="/Portfolio/PortfolioList"
+           class="relative p-2 text-slate-400 hover:text-white transition-colors"
+           title="Toplam Projeler">
+        <span class="material-symbols-outlined">work</span>
+        <span class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-bold rounded-full size-5 flex items-center justify-center">
+            @ViewBag.TotalProjects
+        </span>
+    </a>
+    
+    <!-- Okunmamış Mesajlar -->
+    <a href="/Message/MessageList"
+           class="relative p-2 text-slate-400 hover:text-white transition-colors"
+           title="Okunmamış Mesajlar">
+        <span class="material-symbols-outlined">mail</span>
+        @if (ViewBag.UnreadMessages > 0)
+        {
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full size-5 flex items-center justify-center animate-pulse">
+                @ViewBag.UnreadMessages
+            </span>
+        }
+    </a>
+    
+    <div class="h-8 w-[1px] bg-slate-800 mx-2"></div>
+</div>
+

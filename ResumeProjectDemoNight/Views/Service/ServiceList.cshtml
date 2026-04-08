@@ -1,0 +1,127 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Service>
+@{
+    ViewData["Title"] = "ServicelList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Skill Management Table</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+
+    <main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+        <header class="flex flex-wrap items-center justify-between gap-4 px-8 py-8">
+            <div>
+                <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Servis Listesi</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-1">Configure and manage organizational competencies.</p>
+            </div>
+
+        </header>
+        <div class="px-8 pb-12">
+            <div class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row gap-4 items-center">
+                    <div class="relative w-full md:max-w-md">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                            <span class="material-symbols-outlined text-lg">search</span>
+                        </span>
+                        <input class="w-full bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg pl-10 focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500" placeholder="Servis ara..." type="text" />
+                    </div>
+                    <div class="flex items-center gap-2 ml-auto">
+                       
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50 dark:bg-slate-800/50">
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">ID</th>
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Servis Adı</th>
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Açıklama</th>
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+
+                            @foreach (var item in Model)
+                            {
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+                                    <td class="px-6 py-5 whitespace-nowrap">
+                                        <span class="font-mono text-sm text-slate-500 dark:text-slate-400">@item.ServiceID</span>
+                                    </td>
+                                    <td class="px-6 py-5">
+                                        <div class="flex items-center gap-3">
+                                            <div class="size-2 rounded-full bg-blue-500"></div>
+                                            <span class="text-sm font-semibold text-slate-900 dark:text-slate-200">@item.Title</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-5">
+                                        <div class="flex items-center gap-4 max-w-xs">                                                                                                                                  
+                                            <span class="text-sm text-slate-600 dark:text-slate-300">@item.Description </span>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-5 text-right whitespace-nowrap">
+                                        <div class="flex items-center justify-end gap-3 transition-opacity">
+                                            <a href="/Service/UpdateService/@item.ServiceID" class="flex items-center justify-center h-9 w-9 bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition-all" title="Düzenle">
+                                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                                            </a>
+                                            <a href="/Service/DeleteService/@item.ServiceID" class="flex items-center justify-center h-9 w-9 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all" title="Sil">
+                                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-6 py-6 bg-slate-50/50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                        <a href="/Skill/CreateSkill/" class="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2.5 px-6 rounded-lg border border-primary/20 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-sm font-bold">add</span>
+                            <span>Yeni Servis Ekle</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </main>
+
+
+</body>
+</html>

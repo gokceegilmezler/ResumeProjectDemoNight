@@ -1,0 +1,182 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Skill>
+@{
+    ViewData["Title"] = "SkillList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Skill Management Table</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+    
+        <main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+            <header class="flex flex-wrap items-center justify-between gap-4 px-8 py-8">
+                <div>
+                    <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Yetenek Listesi</h2>
+                    <p class="text-slate-500 dark:text-slate-400 mt-1">Configure and manage organizational competencies.</p>
+                </div>
+                
+            </header>
+            <div class="px-8 pb-12">
+                <div class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden">
+                    <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row gap-4 items-center">
+                        <div class="relative w-full md:max-w-md">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                                <span class="material-symbols-outlined text-lg">search</span>
+                            </span>
+                            <input class="w-full bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg pl-10 focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500" placeholder="Search skills..." type="text" />
+                        </div>
+                        <div class="flex items-center gap-2 ml-auto">
+                            <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                <span class="material-symbols-outlined text-sm">filter_list</span>
+                                Filter
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                <span class="material-symbols-outlined text-sm">download</span>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/50 dark:bg-slate-800/50">
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">ID</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Yetenek Adı</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400">Yüzde</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Düzenle</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+
+                            @foreach (var item in Model)
+                            {
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors group">
+                                    <td class="px-6 py-5 whitespace-nowrap">
+                                        <span class="font-mono text-sm text-slate-500 dark:text-slate-400">@item.SkillId</span>
+                                    </td>
+                                    <td class="px-6 py-5">
+                                        <div class="flex items-center gap-3">
+                                            <div class="size-2 rounded-full bg-blue-500"></div>
+                                            <span class="text-sm font-semibold text-slate-900 dark:text-slate-200">@item.SkillName</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-5">
+                                        <div class="flex items-center gap-4 max-w-xs">
+                                            <div class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                                <div class="h-full bg-primary rounded-full shadow-sm" style="width: @item.SkillDegree%;"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-600 dark:text-slate-300">@item.SkillDegree</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-5 text-right whitespace-nowrap">
+                                        <div class="flex items-center justify-end gap-3 transition-opacity">
+                                            <a href="/Skill/UpdateSkill/@item.SkillId" class="flex items-center justify-center h-9 w-9 bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition-all" title="Düzenle">
+                                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                                            </a>
+                                            <a href="/Skill/DeleteSkill/@item.SkillId" class="flex items-center justify-center h-9 w-9 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all" title="Sil">
+                                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                             }  
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-6 py-6 bg-slate-50/50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                            <a href="/Skill/CreateSkill/" class="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2.5 px-6 rounded-lg border border-primary/20 transition-all active:scale-95">
+                                <span class="material-symbols-outlined text-sm font-bold">add</span>
+                                <span>Add New Skill</span>
+                            </a>
+                            <div class="flex flex-col sm:flex-row items-center gap-6">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                                    Showing <span class="text-slate-900 dark:text-white">1</span> to <span class="text-slate-900 dark:text-white">3</span> of <span class="text-slate-900 dark:text-white">42</span> entries
+                                </p>
+                                <div class="flex items-center gap-1">
+                                    <button class="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors" disabled="">
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="h-8 w-8 rounded flex items-center justify-center text-sm font-bold bg-primary text-white shadow shadow-primary/20">1</button>
+                                    <button class="h-8 w-8 rounded flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">2</button>
+                                    <button class="h-8 w-8 rounded flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">3</button>
+                                    <button class="h-8 w-8 rounded flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400">...</button>
+                                    <button class="h-8 w-8 rounded flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">9</button>
+                                    <button class="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Skills</span>
+                            <span class="material-symbols-outlined text-primary">data_usage</span>
+                        </div>
+                        <p class="text-2xl font-black">128</p>
+                        <div class="mt-2 flex items-center gap-1 text-xs text-emerald-500 font-bold">
+                            <span class="material-symbols-outlined text-xs">trending_up</span>
+                            <span>+12.5% vs last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Top Proficiency</span>
+                            <span class="material-symbols-outlined text-purple-500">star</span>
+                        </div>
+                        <p class="text-2xl font-black">Data Analysis</p>
+                        <div class="mt-2 text-xs text-slate-400 font-medium">98.2% avg employee score</div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Critical Gaps</span>
+                            <span class="material-symbols-outlined text-red-500">warning</span>
+                        </div>
+                        <p class="text-2xl font-black">3 Skills</p>
+                        <div class="mt-2 text-xs text-slate-400 font-medium text-red-400/80">Proficiency below 30% threshold</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+
+</body>
+</html>

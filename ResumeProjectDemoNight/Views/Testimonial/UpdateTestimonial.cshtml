@@ -1,0 +1,101 @@
+﻿@model ResumeProjectDemoNight.Entities.Testimonial
+
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Header Section -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-2xl font-bold text-white">Referans Güncelle</h3>
+                <p class="text-slate-400 text-sm mt-1">Referanslarınızı güncellemek için aşağıdaki formu doldurun.</p>
+            </div>
+            <a href="/Experience/ExperienceList/" class="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all">
+                <span class="material-symbols-outlined" style="font-size: 20px;">arrow_back</span>
+                Geri Dön
+            </a>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+            <div class="p-8">
+                <form method="post" class="space-y-6">
+                    <input type="hidden" asp-for="TestimonialId" />
+
+                    <!-- Name Surname -->
+                    <div class="space-y-2">
+                        <label for="NameSurname" class="block text-sm font-semibold text-slate-300">
+                            Adı Soyadı
+                            <span class="text-red-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500" style="font-size: 20px;">business</span>
+                            <input type="text"
+                                   id="NameSurname"
+                                   asp-for="NameSurname"
+                                   class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                   
+                                   required />
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="space-y-2">
+                        <label for="Degree" class="block text-sm font-semibold text-slate-300">
+                            Başlık
+                            <span class="text-red-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500" style="font-size: 20px;">badge</span>
+                            <input type="text"
+                                   id="Title"
+                                   asp-for="Title"
+                                   class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                   
+                                   required />
+                        </div>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="space-y-2">
+                        <label for="Comment" class="block text-sm font-semibold text-slate-300">
+                            Yorum
+                            <span class="text-red-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500" style="font-size: 20px;">business</span>
+                            <input type="text"
+                                   id="Comment"
+                                   asp-for="Comment"
+                                   class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"                                   
+                                   required />
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex items-center gap-4 pt-6 border-t border-slate-800">
+                        <button type="submit"
+                                class="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg shadow-primary/20">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">save</span>
+                            Referansı Kaydet
+                        </button>
+                        <a href="/Testimonial/TestimonialList/"
+                           class="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-bold transition-all">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+                            İptal Et
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+       
+    </div>
+</div>
+
+
+
+

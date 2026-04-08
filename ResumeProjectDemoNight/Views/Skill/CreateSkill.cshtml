@@ -1,0 +1,92 @@
+﻿@model ResumeProjectDemoNight.Entities.Skill
+@{
+    ViewData["Title"] = "CreateSkill";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-4xl mx-auto space-y-8">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-2xl font-bold text-white">Yeni Yetenek Ekle</h3>
+            <p class="text-slate-400 text-sm mt-1">Yeni bir yetenek eklemek için aşağıdaki formu doldurun.</p>
+        </div>
+        <a href="/Skill/SkillList/" class="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all">
+            <span class="material-symbols-outlined" style="font-size: 20px;">arrow_back</span>
+            Geri Dön
+        </a>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+        <div class="p-8">
+            <form method="post" asp-controller="Skill" asp-action="CreateSkill" class="space-y-6">
+                <!-- Skill Name -->
+                <div class="space-y-2">
+                    <label for="SkillName" class="block text-sm font-semibold text-slate-300">
+                        Yetenek Adı
+                        <span class="text-red-400">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500" style="font-size: 20px;">code</span>
+                        <input type="text"
+                               id="SkillName"
+                               asp-for="SkillName"
+                               class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                               placeholder="Örn: JavaScript, Python, React"
+                               required />
+                    </div>
+                </div>
+
+                <!-- Skill Degree -->
+                <div class="space-y-2">
+                    <label for="SkillDegree" class="block text-sm font-semibold text-slate-300">
+                        Yüzde (0-100)
+                        <span class="text-red-400">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500" style="font-size: 20px;">percent</span>
+                        <input type="number"
+                               id="SkillDegree"
+                               asp-for="SkillDegree"
+                               class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                               placeholder="Örn: 85"
+                               min="0"
+                               max="100"
+                               required />
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex items-center gap-4 pt-6 border-t border-slate-800">
+                    <button type="submit"
+                            class="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                        Yeteneği Ekle
+                    </button>
+                    <a href="/Skill/SkillList/"
+                       class="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-bold transition-all">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+                        İptal Et
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Help Card -->
+    <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+        <div class="flex gap-3">
+            <span class="material-symbols-outlined text-blue-400" style="font-size: 24px;">info</span>
+            <div class="flex-1">
+                <h4 class="text-sm font-semibold text-blue-400 mb-1">İpucu</h4>
+                <p class="text-xs text-slate-400">
+                    Yeteneklerinizi yüzdelik dilimle belirtin. Örneğin, eğer bir teknolojiye orta seviyede hakimseniz 60-70 arası bir değer girebilirsiniz.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
